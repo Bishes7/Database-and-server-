@@ -7,7 +7,22 @@ POST http://localhost:8000/api/v1/users
 Content-Type: application/json
 
 {
-    "fName": "Umesh",
-    "lName":"Dhakal",
-    "age":40
+  "Address":"Dhading Nepal",
+  "city": "Kathmandu",
+  "religion":"HIndu"
 }
+
+### Patch Method
+PATCH http://localhost:8000/api/v1/users
+Content-Type: application/json
+ 
+{
+    "_id": "67b0585e4ff88e184d2a5beb",
+    "Address": "Adamghat",
+    "City":"Dhading"
+}
+
+### Delete Method
+DELETE http://localhost:8000/api/v1/users/67b0585e4ff88e184d2a5beb
+Content-Type: application/json
+

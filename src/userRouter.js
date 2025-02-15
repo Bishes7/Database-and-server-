@@ -19,7 +19,7 @@ router.get("/", async (req, res, next) => {
 });
 
 router.post("/", async (req, res, next) => {
-  const resResult = await tableCollection(req.body);
+  const resResult = await tableCollection(req.body).save();
   console.log(req.body);
   res.json({
     message: "Post method implemented",
@@ -27,12 +27,23 @@ router.post("/", async (req, res, next) => {
   });
 });
 
-router.put("/", (req, res) => {
-  res.json("Put Method");
+router.patch("/", async (req, res, next) => {
+  const { _id, ...rest } = req.body;
+  const updatedResult = await tableCollection.findByIdAndUpdate(_id, rest, {
+    new: true,
+  });
+  res.json({
+    message: "Updated the datas",
+    updatedResult,
+  });
 });
 
-router.delete("/", (req, res) => {
-  res.json("Delete Method");
+router.delete("/:_id", async (req, res, next) => {
+  const { _id } = req.params;
+  const deletedObj = await tableCollection.findByIdAndDelete(_id);
+  res.json({
+    message: "Selected ID is deleted",
+  });
 });
 
 export default router;
